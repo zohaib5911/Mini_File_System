@@ -1,0 +1,22 @@
+#ifndef NODE_H
+#define NODE_H
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Node{
+protected:
+    string name;
+    Node * parent;
+public: 
+    Node():name("NULL"),parent(nullptr){}
+    Node(string name, Node* parent = nullptr) : name(name), parent(parent) {}
+    string getName() { return this->name; }
+    Node * getParent(){ return this->parent; } 
+    virtual void display() const = 0; 
+    virtual bool isDirectory() const = 0; 
+    virtual void list(int depth) const = 0;
+    virtual ~Node() = default;
+};
+
+#endif
