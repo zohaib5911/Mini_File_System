@@ -2,6 +2,7 @@
 #define DIRECTORYNODE_H
 #include <iostream>
 #include "Node.h"
+#include "file.h"
 #include <map>
 
 class DirectoryNode: public Node{
@@ -31,13 +32,21 @@ public:
     void display() const override{
        cout<<this->name<<endl;
        for(auto i : this->children){
-            cout<<i.first<<" -> "<<i.second->getName()<<endl;
+            cout<<this->name<<" -> "<<i.first<<endl;
        }
     }
     Node* findByName(string nam){
         auto it =  children.find(nam);
         if(it == children.end()){
             cout<<nam<<" not found";
+            return nullptr;
+        }
+        return it->second;
+    }
+    Node* getChild(const string& chld){
+        auto it =  children.find(chld);
+        if(it == children.end()){
+            cout<<chld<<" not found";
             return nullptr;
         }
         return it->second;
