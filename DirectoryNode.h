@@ -14,6 +14,20 @@ public:
     void addChild(string nam,Node* child){
         children.insert_or_assign(nam,child);
     }
+    bool isValidChild(const string& chld) const{
+        auto it =  children.find(chld);
+        if(it == children.end()){
+           return false;
+        }
+        return true;
+    }
+    bool removeChild(const string& chld){
+        if(this->isValidChild(chld)){
+            children.erase(chld);
+            return true;
+        }   
+        return false;
+    }
     void display() const override{
        cout<<this->name<<endl;
        for(auto i : this->children){
@@ -30,9 +44,13 @@ public:
     }
     bool isDirectory() const override {
         return true;
-    }; 
-    void list(int depth) const override{
-
+    };  
+    void list(int depth=0) const override{
+        for(int i=0;i<depth;i++){ cout<<"         ";}
+        cout<<this->name<<endl;
+        for(auto i:this->children){
+            i.second->list(depth+1);
+        }
     }
 
     ~DirectoryNode() override {
