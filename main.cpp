@@ -41,5 +41,12 @@ int main(){
     p1->display();
     cout<<"\nFile \n";
     f1->display();
+     cout<<"\nIs valid + remove : \n"; 
+    if (obj->isValidChild("Name")){
+        cout<<"Is Valid \n";
+    }
+    if(obj->removeChild("Name")){
+        cout<<"Deleted\n";
+    }
 return 0;
 } 

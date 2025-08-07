@@ -30,9 +30,9 @@ public:
         return false;
     }
     void display() const override{
-       cout<<this->name<<endl;
+       cout<<"[DIR]"<<this->name<<endl;
        for(auto i : this->children){
-            cout<<this->name<<" -> "<<i.first<<endl;
+            cout<<"         |-> "<<i.first<<endl;
        }
     }
     Node* findByName(string nam){
