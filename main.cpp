@@ -48,5 +48,6 @@ int main(){
     if(obj->removeChild("Name")){
         cout<<"Deleted\n";
     }
+    cout<<"-";
 return 0;
 } 
