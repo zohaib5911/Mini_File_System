@@ -34,6 +34,7 @@ public:
     void list(int depth) const override{
 
     }
+
     ~DirectoryNode() override {
         for (auto& [_, child] : children) {
             delete child;
