@@ -118,8 +118,32 @@ public:
             clonedChild = clonedChild->clone(childNode, copied);
             copied->addChild(childName, clonedChild);
         }
-
         return copied;
+    }
+
+    void rename(const string& newName) override{
+        this->name = newName;
+    }
+
+    void move(Node* source, DirectoryNode* destination){  
+        if(!this->isValidChild(source->getName())){
+            cout<<source->getName()<<" Not Avaliable in "<<this->getName();
+            return;
+        }
+        if(destination->isValidChild(source->getName())){
+            cout<<source->getName()<<" is already at "<<destination->getName()<<endl;
+            return;
+        }
+        destination->addChild(source->getName(),source);
+        if(this->removeChild(source->getName()) && 
+            destination->isValidChild(source->getName())){
+            cout<<"Child is moved from "
+                <<this->getName()<<" to "<<destination->getName()<<"\n";
+        }
+        else {
+            cout<<"Failed to move"
+               <<this->getName()<<" to "<<destination->getName()<<"\n";
+        }
     }
 
     ~DirectoryNode() override {
@@ -130,3 +154,32 @@ public:
 };
 
 #endif
+
+
+
+
+
+    // void move(Node* source, DirectoryNode* destination){  
+    //     if(!this->isValidChild(source->getName())){
+    //         cout<<source->getName()<<" Not Avaliable in "<<this->getName();
+    //         return;
+    //     }
+    //     Node * temp = nullptr;
+    //     if(dynamic_cast<DirectoryNode*>(source)){
+    //         temp = new DirectoryNode();
+    //     }
+    //     else{
+    //         temp = new File();
+    //     }
+    //     temp = temp->clone(source,destination);
+    //     destination->addChild(temp->getName(),temp);
+    //     if(this->removeChild(source->getName()) && 
+    //         destination->isValidChild(temp->getName())){
+    //         cout<<"Child is moved from "
+    //             <<this->getName()<<" to "<<destination->getName()<<"\n";
+    //     }
+    //     else {
+    //         cout<<"Failed to move"
+    //            <<this->getName()<<" to "<<destination->getName()<<"\n";
+    //     }
+    // }

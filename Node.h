@@ -14,6 +14,7 @@ public:
     string getName() { return this->name; }
     Node * getParent(){ return this->parent; } 
     virtual void display() const = 0; 
+    virtual void rename(const string& newName) = 0;
     virtual bool isDirectory() const = 0; 
     virtual void list(int depth) const = 0;
     virtual ~Node() = default;

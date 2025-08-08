@@ -12,8 +12,8 @@ int main(){
     DirectoryNode* obj = new DirectoryNode("Folder Y");
     DirectoryNode* chld1 = new DirectoryNode("Folder X",obj);
     obj->addChild("Folder X",chld1);
-    DirectoryNode* chld2 = new DirectoryNode("fl",obj);
-    obj->addChild("fl",chld2);
+    DirectoryNode* chld2 = new DirectoryNode("Child 2",obj);
+    obj->addChild("Child 2",chld2);
     
     // obj->display();
     // cout<<"\nParent \n";
@@ -36,9 +36,9 @@ int main(){
     // x->display();
 
     // cout<<"\nCreating file\n";
-    File* f1 = new File("Names",chld1);
-    chld1->addChild("Name",f1);
-    f1->addContent("M ZOHAIB SAJJAD");
+    File* file_1 = new File("Names File",chld1);
+    chld1->addChild("Names File",file_1);
+    file_1->addContent("M ZOHAIB SAJJAD");
     // cout<<f1->isDirectory()<<endl;
     // Node* p1 = f1->getParent();
     // p1->display();
@@ -55,13 +55,28 @@ int main(){
 
     // cout<<"Get full Path: "<<chld1->getFulPath();
 
-    obj->duplicate("Folder X");
-    Node * s1 = obj->findByName("Folder X_Copy");
-    // obj->list();
-    s1->display();
-    Node * fp = s1->getChild("Name");
-    fp->display();
+    // obj->duplicate("Folder X");
+    // Node * s1 = obj->findByName("Folder X_Copy");
+    // // obj->list();
+    // s1->display();
+    // Node * fp = s1->getChild("Name");
+    // fp->display();
 
+    cout<<"\nBefore : \n";
+
+    cout<<"Child 1 : \n";
+    chld1->display();
+    cout<<"\nChild 2:  \n";
+    chld2->rename("Renamed Folder");
+    chld2->display();
+
+    cout<<"\nAfter : \n";
+
+    chld1->move(file_1,chld2);
+    cout<<"Child 1 : \n";
+    chld1->display();
+    cout<<"\nChild 2:  \n";
+    chld2->display();
 
 return 0;
 } 

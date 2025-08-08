@@ -4,6 +4,7 @@
 // #include "DirectoryNode.h"
 
 class File : public Node{
+private:
     string content;
     Node* getChild(const string& chld) override{ return nullptr; }
     void list (int depth = 0)const override{ return; }
@@ -21,6 +22,9 @@ public:
     }
     void addContent(const string& contnt){
         this->content.append(contnt);
+    }
+    void rename(const string& newName) override{
+        this->name = newName;
     }
     bool isDirectory() const override{ return false; }
     void display() const override{
