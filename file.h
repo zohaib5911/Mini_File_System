@@ -1,6 +1,7 @@
 #ifndef FILE_H
 #define FILE_H
 #include "Node.h"
+#include <vector>
 // #include "DirectoryNode.h"
 
 class File : public Node{
@@ -32,6 +33,21 @@ public:
         cout<<"\t\t\t\t"<<content<<endl;
     }
     string getContent(){ return this->content; }
+
+    string getFulPath() override{
+        vector<string> names;
+        string path;
+        Node * temp = this;
+        while(temp!=nullptr){
+            names.push_back(temp->getName());
+            temp = temp->getParent();
+        }
+        for (int i = names.size() - 1; i >= 0; --i) {
+            path.append(names[i]);
+            if (i != 0) path.append(" -> ");
+        }
+        return path;
+    }
 
     Node* clone(Node* other, Node* newParent) override {
         File* otherFile = dynamic_cast<File*>(other);

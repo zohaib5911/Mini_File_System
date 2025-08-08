@@ -12,6 +12,7 @@ public:
     Node():name("NULL"),parent(nullptr){}
     Node(string name, Node* parent = nullptr) : name(name), parent(parent) {}
     string getName() { return this->name; }
+    virtual string getFulPath() = 0;
     Node * getParent(){ return this->parent; } 
     virtual void display() const = 0; 
     virtual void rename(const string& newName) = 0;

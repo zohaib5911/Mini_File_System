@@ -68,7 +68,7 @@ public:
             i.second->list(depth+1);
         }
     }
-    string getFulPath(){
+    string getFulPath() override{
         vector<string> names;
         string path;
         Node * temp = this;
