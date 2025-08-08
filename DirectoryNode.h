@@ -2,8 +2,8 @@
 #define DIRECTORYNODE_H
 #include <iostream>
 #include "Node.h"
-#include <vector>
 #include "file.h"
+#include <vector>
 #include <map>
 
 class DirectoryNode: public Node{
@@ -42,7 +42,7 @@ public:
        }
     }
     
-    Node* findByName(string nam){
+    Node* findByName(string nam) override{
         auto it =  children.find(nam);
         if(it == children.end()){
             cout<<nam<<" not found";
@@ -50,7 +50,7 @@ public:
         }
         return it->second;
     }
-    Node* getChild(const string& chld){
+    Node* getChild(const string& chld) override{
         auto it =  children.find(chld);
         if(it == children.end()){
             cout<<chld<<" not found";

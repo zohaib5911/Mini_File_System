@@ -1,14 +1,18 @@
 #ifndef FILE_H
 #define FILE_H
 #include "Node.h"
-#include "DirectoryNode.h"
+// #include "DirectoryNode.h"
 
 class File : public Node{
     string content;
+    Node* getChild(const string& chld) override{ return nullptr; }
     void list (int depth = 0)const override{ return; }
+    Node* findByName(string nam) override {return nullptr; }
 public:
+    // File() : Node() {}
     File(){
         this->name = "Null";
+        content = "";
         this->parent = nullptr;
     }
     File(const string& name,Node* parent):content(""){

@@ -36,7 +36,7 @@ int main(){
     // cout<<"\nCreating file\n";
     File* f1 = new File("Names",chld1);
     chld1->addChild("Name",f1);
-    // f1->addContent("M ZOHAIB SAJJAD");
+    f1->addContent("M ZOHAIB SAJJAD");
     // cout<<f1->isDirectory()<<endl;
     // Node* p1 = f1->getParent();
     // p1->display();
@@ -54,9 +54,12 @@ int main(){
     // cout<<"Get full Path: "<<chld1->getFulPath();
 
     obj->duplicate("Folder X");
-    obj->display();
-    cout<<"_"<<endl;
-    obj->list();
+    Node * s1 = obj->findByName("Folder X_Copy");
+    // obj->list();
+    s1->display();
+    Node * fp = s1->getChild("Name");
+    fp->display();
+
 
 return 0;
 } 

@@ -17,6 +17,8 @@ public:
     virtual bool isDirectory() const = 0; 
     virtual void list(int depth) const = 0;
     virtual ~Node() = default;
+    virtual Node* getChild(const string& chld) = 0 ;
+    virtual Node* findByName(string nam) =0;
     virtual Node* clone(Node* toClone, Node* newParent) = 0;
 };
 
