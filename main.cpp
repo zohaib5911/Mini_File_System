@@ -34,31 +34,31 @@ int main() {
 
         switch (choice) {
         case 1:
-    cout << "Enter directory name: ";
-    getline(cin, name);
-    cout << "Enter parent directory name (or Root): ";
-    getline(cin, parentName);
-
-    // Special case: If parent is "Root", directly assign root
-    if (parentName == "Root") {
-        foundNode = root;
-    } else {
-        foundNode = root->findByName(parentName);
-    }
-
-    if (foundNode && foundNode->isDirectory()) {
-        DirectoryNode* parentDir = dynamic_cast<DirectoryNode*>(foundNode);
-        if (!parentDir->isValidChild(name)) { // prevent duplicates
-            DirectoryNode* newDir = new DirectoryNode(name, parentDir);
-            parentDir->addChild(name, newDir);
-            cout << "Directory created under " << parentDir->getName() << ".\n";
-        } else {
-            cout << "Directory with this name already exists.\n";
-        }
-    } else {
-        cout << "Parent directory not found. Directory not created.\n";
-    }
-    break;
+            cout << "Enter directory name: ";
+            getline(cin, name);
+            cout << "Enter parent directory name (or Root): ";
+            getline(cin, parentName);
+                
+            // Special case: If parent is "Root", directly assign root
+            if (parentName == "Root") {
+                foundNode = root;
+            } else {
+                foundNode = root->findByName(parentName);
+            }
+        
+            if (foundNode && foundNode->isDirectory()) {
+                DirectoryNode* parentDir = dynamic_cast<DirectoryNode*>(foundNode);
+                if (!parentDir->isValidChild(name)) { // prevent duplicates
+                    DirectoryNode* newDir = new DirectoryNode(name, parentDir);
+                    parentDir->addChild(name, newDir);
+                    cout << "Directory created under " << parentDir->getName() << ".\n";
+                } else {
+                    cout << "Directory with this name already exists.\n";
+                }
+            } else {
+                cout << "Parent directory not found. Directory not created.\n";
+            }
+            break;
 
 
         case 2:
@@ -78,32 +78,32 @@ int main() {
             break;
 
         case 3:
-          cout << "Enter parent directory name (or Root): ";
-getline(cin, parentName);
+            cout << "Enter parent directory name (or Root): ";
+            getline(cin, parentName);
 
-if (parentName == "Root") {
-    foundNode = root;
-} else {
-    foundNode = root->findByName(parentName);
-}
+            if (parentName == "Root") {
+                foundNode = root;
+            } else {
+                foundNode = root->findByName(parentName);
+            }
 
-if (foundNode && foundNode->isDirectory()) {
-    DirectoryNode* parentDir = dynamic_cast<DirectoryNode*>(foundNode);
-    cout << "Enter file name: ";
-    getline(cin, name);
-
-    Node* fileNode = parentDir->getChild(name);
-    if (fileNode && !fileNode->isDirectory()) {
-        cout << "Enter content: ";
-        getline(cin, content);
-        dynamic_cast<File*>(fileNode)->addContent(content);
-        cout << "Content added.\n";
-    } else {
-        cout << "File not found in the specified folder.\n";
-    }
-} else {
-    cout << "Parent directory not found.\n";
-}
+            if (foundNode && foundNode->isDirectory()) {
+                DirectoryNode* parentDir = dynamic_cast<DirectoryNode*>(foundNode);
+                cout << "Enter file name: ";
+                getline(cin, name);
+            
+                Node* fileNode = parentDir->getChild(name);
+                if (fileNode && !fileNode->isDirectory()) {
+                    cout << "Enter content: ";
+                    getline(cin, content);
+                    dynamic_cast<File*>(fileNode)->addContent(content);
+                    cout << "Content added.\n";
+                } else {
+                    cout << "File not found in the specified folder.\n";
+                }
+            } else {
+                cout << "Parent directory not found.\n";
+            }
 
 
         case 4:
@@ -111,30 +111,64 @@ if (foundNode && foundNode->isDirectory()) {
             break;
 
         case 5:
-            cout << "Enter name to search: ";
-            getline(cin, name);
-            foundNode = root->findByName(name);
-            if (foundNode) {
-                cout << "Found:\n";
-                foundNode->display();
-            } else {
-                cout << "Not found.\n";
-            }
-            break;
+            cout << "Enter directory name to search in (or Root): ";
+            getline(cin, parentName);
 
-        case 6:
-            cout << "Enter current name: ";
-            getline(cin, name);
-            foundNode = root->findByName(name);
-            if (foundNode) {
-                cout << "Enter new name: ";
-                getline(cin, newName);
-                foundNode->rename(newName);
-                cout << "Renamed.\n";
+            if (parentName == "Root") {
+                foundNode = root;
             } else {
-                cout << "Node not found.\n";
+                foundNode = root->findByName(parentName);
+            }
+
+            if (foundNode && foundNode->isDirectory()) {
+                DirectoryNode* parentDir = dynamic_cast<DirectoryNode*>(foundNode);
+            
+                cout << "Enter name to search: ";
+                getline(cin, name);
+            
+                Node* result = parentDir->findByName(name);
+                if (result) {
+                    cout << "Found:\n";
+                    result->display();
+                } else {
+                    cout << "Not found in this directory.\n";
+                }
+            } else {
+                cout << "Directory not found.\n";
+            }
+
+
+        case 6: {
+            cout << "Enter directory name to search in (or Root): ";
+            getline(cin, parentName);
+
+            if (parentName == "Root") {
+                foundNode = root;
+            } else {
+                foundNode = root->findByName(parentName);
+            }
+        
+            if (foundNode && foundNode->isDirectory()) {
+                DirectoryNode* parentDir = dynamic_cast<DirectoryNode*>(foundNode);
+            
+                cout << "Enter current name: ";
+                getline(cin, name);
+            
+                Node* target = parentDir->getChild(name);
+                if (target) {
+                    cout << "Enter new name: ";
+                    getline(cin, newName);
+                    target->rename(newName);
+                    cout << "Renamed.\n";
+                } else {
+                    cout << "Node not found in this directory.\n";
+                }
+            } else {
+                cout << "Directory not found.\n";
             }
             break;
+        }
+
 
         case 7:
             cout << "Enter parent directory name: ";
